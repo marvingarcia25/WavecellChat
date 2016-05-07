@@ -12,15 +12,20 @@
         $.connection.hub.start(); // starts hub
 
         // register a client method on hub to be invoked by the server
-        $scope.chatHub.client.broadcastMessage = function (name, message) {
-            var newMessage = name + ' says: ' + message;
+        $scope.chatHub.client.broadcastMessage = function (chatModels) {
+            console.log(chatModels);
+            
+            $scope.messages = [];
+            angular.forEach(chatModels, function (value, key) {
+                $scope.messages.push(value);
 
-            // push the newly coming message to the collection of messages
-            $scope.messages.push(newMessage);
-            $scope.$apply();
+            });
+           
+           $scope.$apply();
         };
 
         $scope.newMessage = function () {
+
             // sends a new message to the server
             $scope.chatHub.server.sendMessage($scope.name, $scope.message);
 
