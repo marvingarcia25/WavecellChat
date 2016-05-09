@@ -1,31 +1,166 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body ng-app="chat-app">
-
-    <div ng-controller="ChatContoller" >
-        <div>
-            Nick Name: <input type="text" ng-model="name" /><br />
-            Message: <input type="text" ng-model="message" /><br />
-            <input type="button" value="Send" ng-click="newMessage()" />
-        </div>
-        <div>
-            <ul>
-                <li ng-repeat="chat in messages">
-                    <span ng-bind="chat.NickName"></span>
-                    <span ng-bind="chat.Message"></span>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>BOOTSTRAP CHAT EXAMPLE</title>
+    <!-- BOOTSTRAP CHAT EXAMPLE -->
+    <link href="Styles/bootstrap.css" rel="stylesheet" />
+    <link href="Styles/SignIn.css" rel="stylesheet" />
 
     <script src="Scripts/jquery-1.6.4.js"></script>
     <script src="Scripts/jquery.signalR-2.2.0.js"></script>
     <script src="signalr/hubs"></script>
     <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-cookies.js"></script>
+    <script src="Scripts/angular-uuid2.js"></script>
+    <script src="Scripts/bootbox.min.js"></script>
     <script src="Scripts/sampleChat.js"></script>
-</body>
+</head>
+<body style="font-family:Verdana" ng-app="chat-app">
+    <div class="container" ng-controller="ChatController">
+        <div ng-show="showChat" class="row" style="padding-top:40px;">
+            <h3 class="text-center">WAVECELL CHAT EXAMPLE </h3>
+            <br /><br />
+
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        RECENT CHAT HISTORY
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button" ng-click="logOutUser()">LogOut</button>
+                        </span>
+                    </div>
+                    <div class="panel-body chatScroll">
+                        <ul class="media-list ">
+                            <li class="media" ng-repeat="chat in messages">
+
+                                <div class="media-body ">
+
+                                    <div class="media">
+                                        <a class="pull-left" href="#">
+                                            <!--<img class="media-object img-circle " src="assets/img/user.png" />-->
+                                        </a>
+                                        <div class="media-body">
+                                            <span ng-bind="chat.Message"></span>
+                                            <br />
+                                            <small class="text-muted"><span ng-bind="nickName"> </span> | <span ng-bind="chat.ChatTime"></span></small>
+                                            <hr />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Message" ng-model="message" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button" ng-click="newMessage()">Send</button>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        ONLINE USERS
+                    </div>
+                    <div class="panel-body">
+                        <ul class="media-list">
+                            <li class="media" ng-repeat="user in userList">
+
+                                <div class="media-body">
+
+                                    <div class="media">
+                                        <a class="pull-left" href="#">
+                                            <!--<img class="media-object img-circle" style="max-height:40px;" src="assets/img/user.png" />-->
+                                        </a>
+                                        <div class="media-body">
+                                            <h5><span ng-bind="user.NickName"></span> | <span ng-bind="user.IP"></span></h5>
+
+                                            <small class="text-muted">Active From 3 hours</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div ng-show="showLogin" class="row form-signin">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <div class="alert alert-warning" ng-show="showWarning">
+                <strong>Warning!</strong> Nickname is required.
+            </div>
+            
+
+            <label for="inputEmail" class="sr-only">Input Nickname</label>
+            <input type="text" ng-model="nickName" class="form-control" placeholder="Nickname" required="true" autofocus="" /><br />
+
+            <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="addUser()">Login</button>
+       
+        </div>
+    </div>
+
+
+
+
+    <!--<body ng-app="chat-app" style="font-family:Verdana">
+
+
+
+        <div ng-controller="ChatController">
+            <div ng-show="showLogin">
+                Login<br />
+
+                Nick Name: <input type="text" ng-model="nickName" /><br />
+                <input type="button" value="Login" ng-click="addUser()" />
+
+            </div>
+            <div ng-show="showChat">
+                <div>
+                    Hi <span ng-bind="nickName"> </span> <br />
+                    Message: <input type="text" ng-model="message" /><br />
+                    <input type="button" value="Send" ng-click="newMessage()" />
+                    <input type="button" value="LogOut" ng-click="logOutUser()" />
+                </div>
+                <div>
+                    <ul>
+                        <li ng-repeat="chat in messages">
+                            <span ng-bind="chat.ChatTime"></span>
+                            <span ng-bind="chat.NickName"></span>:
+                            <span ng-bind="chat.Message"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <ul>
+                            <li ng-repeat="user in userList">
+                                <span ng-bind="user.NickName"></span>
+                                <span ng-bind="user.IP"></span>:
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </body>-->
 </html>

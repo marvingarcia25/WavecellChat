@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>AngularJS.Core</id>
-    <version>1.4.4</version>
+    <version>1.5.5</version>
     <title>AngularJS Core</title>
     <authors>The AngularJS Team</authors>
     <owners>The AngularJS Team</owners>
