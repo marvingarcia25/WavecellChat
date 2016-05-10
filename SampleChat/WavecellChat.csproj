@@ -116,6 +116,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="Readme.txt" />
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-uuid2.js" />
@@ -133,6 +134,10 @@
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\linkify-html.js" />
+    <Content Include="Scripts\linkify-jquery.min.js" />
+    <Content Include="Scripts\linkify.js" />
+    <Content Include="Scripts\linkify.min.js" />
     <Content Include="Scripts\sampleChat.js" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\SignIn.css" />

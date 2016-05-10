@@ -50,6 +50,7 @@
             
             $scope.messages = [];
             angular.forEach(chatModels, function (value, key) {
+                
                 $scope.messages.push(value);
             });
            
@@ -236,4 +237,5 @@ $('.chatScroll').each(function (i, value) {
 height += '';
 
 $('.chatScroll').animate({ scrollTop: height });
+
 
