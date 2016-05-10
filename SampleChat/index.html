@@ -65,7 +65,7 @@
                     </div>
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Message" ng-model="message" />
+                            <input type="text" class="form-control" placeholder="Enter Message" ng-model="message" ng-keyup="$event.keyCode == 13 && newMessage()" />
                             <span class="input-group-btn">
                                 <button class="btn btn-info" type="button" ng-click="newMessage()">Send</button>
                             </span>
@@ -114,7 +114,7 @@
             
 
             <label for="inputEmail" class="sr-only">Input Nickname</label>
-            <input type="text" ng-model="nickName" class="form-control" placeholder="Nickname" required="true" autofocus="" /><br />
+            <input type="text" ng-model="nickName" class="form-control" placeholder="Nickname" required="true" autofocus="" ng-keyup="$event.keyCode == 13 && addUser()" /><br />
 
             <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="addUser()">Login</button>
        
