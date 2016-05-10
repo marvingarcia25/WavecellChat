@@ -19,11 +19,8 @@
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-cookies.js"></script>
     <script src="Scripts/angular-uuid2.js"></script>
-    <script src="Scripts/bootbox.min.js"></script>   
-    <script src="Scripts/linkify.js"></script>
-    <script src="Scripts/linkify-html.js"></script>
-    <script src="Scripts/linkify.min.js"></script>
-    <script src="Scripts/linkify-jquery.min.js"></script>
+    <script src="Scripts/bootbox.min.js"></script>       
+    <script src="scripts/angular-linkify.min.js"></script>
     <script src="Scripts/sampleChat.js"></script>
 </head>
 <body style="font-family:Verdana" ng-app="chat-app">
@@ -48,10 +45,9 @@
 
                                     <div class="media">
                                         <a class="pull-left" href="#">
-                                            <!--<img class="media-object img-circle " src="assets/img/user.png" />-->
                                         </a>
-                                        <div class="media-body">
-                                            <span class='messageHere' ng-bind="chat.Message"></span>
+                                        <div class="media-body">                                           
+                                            <div ng-bind="chat.Message" linkify="twitter"></div>
                                             <br />
                                             <small class="text-muted"><span ng-bind="chat.NickName"> </span> | <span ng-bind="chat.ChatTime"></span></small>
                                             <hr />
@@ -86,7 +82,6 @@
 
                                     <div class="media">
                                         <a class="pull-left" href="#">
-                                            <!--<img class="media-object img-circle" style="max-height:40px;" src="assets/img/user.png" />-->
                                         </a>
                                         <div class="media-body">
                                             <h5><span ng-bind="user.NickName"></span> | <span ng-bind="user.IP"></span></h5>

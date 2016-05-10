@@ -1,9 +1,9 @@
 ﻿
 
 (function (utils) {
-    var app = angular.module('chat-app', ['ngCookies']);
+    var app = angular.module('chat-app', ['ngCookies', 'linkify']);
 
-    app.controller('ChatController', function ($scope, $http, $cookies) {
+    app.controller('ChatController', function ($scope, $http, $cookies, linkify, $sce) {
         // scope variables
         $scope.nickName = 'Guest'; // holds the user's name
         $scope.message = ''; // holds the new message
@@ -50,7 +50,7 @@
             
             $scope.messages = [];
             angular.forEach(chatModels, function (value, key) {
-                
+                //value.Message = $sce.trustAsHtml(linkify.twitter(value.Message));
                 $scope.messages.push(value);
             });
            
@@ -229,6 +229,8 @@
     })
 }());
 
+
+//JQUERY OVERRIDE
 var height = 0;
 $('.chatScroll').each(function (i, value) {
     height += parseInt($(this).height());
@@ -238,4 +240,7 @@ height += '';
 
 $('.chatScroll').animate({ scrollTop: height });
 
+var exp = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/g;
 
+
+$('span').html($('span').html().replace(exp, "<a target = '_blank' href='$1'>$1</a>"));

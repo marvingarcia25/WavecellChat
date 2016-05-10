@@ -119,6 +119,7 @@
     <Content Include="Readme.txt" />
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular-linkify.min.js" />
     <Content Include="Scripts\angular-uuid2.js" />
     <Content Include="Scripts\angular-uuid2.min.js" />
     <Content Include="Scripts\angular.js" />
