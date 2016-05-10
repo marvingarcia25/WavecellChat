@@ -21,6 +21,11 @@
     <script src="Scripts/angular-uuid2.js"></script>
     <script src="Scripts/bootbox.min.js"></script>       
     <script src="scripts/angular-linkify.min.js"></script>
+    <script src="scripts/moment.js"></script>
+    <script src="scripts/moment-timezone.min.js"></script>
+    
+    <script src="scripts/angular-moment.js"></script>
+    <script src="scripts/angular-moment.min.js"></script>
     <script src="Scripts/sampleChat.js"></script>
 </head>
 <body style="font-family:Verdana" ng-app="chat-app">
@@ -49,7 +54,7 @@
                                         <div class="media-body">                                           
                                             <div ng-bind="chat.Message" linkify="twitter"></div>
                                             <br />
-                                            <small class="text-muted"><span ng-bind="chat.NickName"> </span> | <span ng-bind="chat.ChatTime"></span></small>
+                                            <small class="text-muted"><span ng-bind="chat.NickName" > </span> | <span ng-bind="chat.ChatTime"></span> </small>
                                             <hr />
                                         </div>
                                     </div>
@@ -84,9 +89,10 @@
                                         <a class="pull-left" href="#">
                                         </a>
                                         <div class="media-body">
-                                            <h5><span ng-bind="user.NickName"></span> | <span ng-bind="user.IP"></span></h5>
+                                            <h5><span ng-mouseenter="show = true" ng-mouseleave="show = false" ng-bind="user.NickName" ng-click="nameClicked(user.NickName)"></span> </h5>
+                                            <div ng-bind="user.IP" ng-show="show"></div>
 
-                                            <small class="text-muted">Active From 3 hours</small>
+                                          <!--  <small class="text-muted">Active From 3 hours</small>-->
                                         </div>
                                     </div>
 

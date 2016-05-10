@@ -1,8 +1,8 @@
 ﻿
 
 (function (utils) {
-    var app = angular.module('chat-app', ['ngCookies', 'linkify']);
-
+    var app = angular.module('chat-app', ['ngCookies', 'linkify', 'angularMoment']);
+    
     app.controller('ChatController', function ($scope, $http, $cookies, linkify, $sce) {
         // scope variables
         $scope.nickName = 'Guest'; // holds the user's name
@@ -50,7 +50,7 @@
             
             $scope.messages = [];
             angular.forEach(chatModels, function (value, key) {
-                //value.Message = $sce.trustAsHtml(linkify.twitter(value.Message));
+
                 $scope.messages.push(value);
             });
            
@@ -77,8 +77,13 @@
         $scope.newMessage = function () {
 
             $scope.chatTime = new Date();
+
+
+
+            
             //call server hub
             $scope.chatHub.server.sendMessage($cookies.get('wavecellToken'), $scope.nickName, $scope.message, $scope.formatDate($scope.chatTime, "yyyy-dd-MM HH:mm:ss"), $scope.iP);
+            
             $scope.message = '';
             var height = 10000;
             $('.chatScroll').each(function (i, value) {
@@ -135,12 +140,18 @@
                 $scope.$apply(function () {
                     $scope.showChat = false;
                     $scope.showLogin = true;
+                    $scope.showWarning = false;
                     $cookies.remove('wavecellToken');
                 });
             }, function (e) {
                 alert(e.message);
             });
 
+        }
+
+        $scope.nameClicked = function (nickName) {
+            console.log(nickName);
+            $scope.message = $scope.message + ' ' + nickName;
         }
         
         $scope.formatDate = function (date, format, utc) {
@@ -241,6 +252,4 @@ height += '';
 $('.chatScroll').animate({ scrollTop: height });
 
 var exp = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/g;
-
-
 $('span').html($('span').html().replace(exp, "<a target = '_blank' href='$1'>$1</a>"));
